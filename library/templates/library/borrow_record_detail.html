@@ -1,0 +1,15 @@
+
+{% extends 'library/base.html' %}
+
+{% block title %}Borrow Record Detail{% endblock %}
+
+{% block content %}
+    <h1>Borrow Record Detail</h1>
+    <p><strong>Book:</strong> {{ borrow_record.book.title }}</p>
+    <p><strong>Member:</strong> {{ borrow_record.member.name }}</p>
+    <p><strong>Borrow Date:</strong> {{ borrow_record.borrow_date }}</p>
+    <p><strong>Return Date:</strong> {{ borrow_record.return_date|default:"Not returned" }}</p>
+    <a href="{% url 'borrow_record_list' %}" class="btn btn-secondary">Back to List</a>
+    <a href="{% url 'borrow_record_update' borrow_record.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'borrow_record_delete' borrow_record.pk %}" class="btn btn-danger">Delete</a>
+{% endblock %}

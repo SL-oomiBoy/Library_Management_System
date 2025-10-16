@@ -1,0 +1,15 @@
+
+{% extends 'library/base.html' %}
+
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+    <h1>Are you sure you want to delete this borrow record?</h1>
+    <p><strong>Book:</strong> {{ borrow_record.book.title }}</p>
+    <p><strong>Member:</strong> {{ borrow_record.member.name }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'borrow_record_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

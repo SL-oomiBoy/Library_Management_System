@@ -1,0 +1,92 @@
+{% extends 'library/base.html' %}
+
+{% block title %}Borrow Records{% endblock %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0"><i class="fas fa-exchange-alt"></i> Borrow Records</h1>
+        <a href="{% url 'borrow_record_create' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Add New Record
+        </a>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Search and Filter</h5>
+        </div>
+        <div class="card-body">
+            <form method="get" class="row g-3 align-items-center">
+                <div class="col-md-6">
+                    <input type="text" name="q" class="form-control" placeholder="Search by book or member..." value="{{ request.GET.q }}">
+                </div>
+                <div class="col-md-4">
+                    <select name="status" class="form-select">
+                        <option value="">All Statuses</option>
+                        <option value="returned" {% if request.GET.status == 'returned' %}selected{% endif %}>Returned</option>
+                        <option value="not_returned" {% if request.GET.status == 'not_returned' %}selected{% endif %}>Not Returned</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if borrow_records %}
+        <div class="card shadow-sm">
+            <div class="card-header">
+                <h5 class="mb-0">Borrow Records</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Book</th>
+                            <th scope="col">Member</th>
+                            <th scope="col">Borrow Date</th>
+                            <th scope="col">Return Date</th>
+                            <th scope="col" class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in borrow_records %}
+                            <tr>
+                                <td>{{ record.book.title }}</td>
+                                <td>{{ record.member.name }}</td>
+                                <td>{{ record.borrow_date }}</td>
+                                <td>
+                                    {% if record.return_date %}
+                                        <span class="badge bg-success">{{ record.return_date }}</span>
+                                    {% else %}
+                                        <span class="badge bg-warning">Not Returned</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-end">
+                                    <a href="{% url 'borrow_record_detail' record.pk %}" class="btn btn-info btn-sm">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="{% url 'borrow_record_update' record.pk %}" class="btn btn-warning btn-sm">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a href="{% url 'borrow_record_delete' record.pk %}" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <div class="text-center p-5">
+            <p class="lead">No borrow records found.</p>
+            <a href="{% url 'borrow_record_create' %}" class="btn btn-primary mt-3">
+                <i class="fas fa-plus"></i> Add the First Record
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}
