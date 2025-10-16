@@ -28,7 +28,7 @@ Follow these steps to get the project running on your local machine.
 
 **1. Clone the Repository**
 ```sh
-git clone <your-repository-url>
+git clone https://github.com/SL-oomiBoy/Library_Management_System
 cd Library_Management_System
 ```
 
