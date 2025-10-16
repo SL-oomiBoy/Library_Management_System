@@ -86,4 +86,5 @@ The application will be available at `http://127.0.0.1:8000/`.
 
 ---
 
-*This README was generated with the assistance of an AI tool.*
+**Developed by [Omiya](https://github.com/SL-oomiBoy)**
+
