@@ -2,6 +2,10 @@
 
 A simple and modern web application for managing a library's collection, members, and borrowing records. Built with Django and styled with Bootstrap 5.
 
+## 📸 Screenshot
+
+![Library Management System Screenshot](Screenshot%202025-10-16%20204624.png)
+
 ## Features
 
 - **Modern User Interface**: A clean, responsive, and modern UI built with Bootstrap 5.
